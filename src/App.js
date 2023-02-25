@@ -1,7 +1,8 @@
+import { ApplicationViews } from "./ApplicationViews";
 
 function App() {
   return <>
-    
+    <ApplicationViews />
   </>
 }
 
