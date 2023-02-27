@@ -10,16 +10,16 @@ export const Navbar = () => {
                     <a href="/">Home</a>
                 </li>
                 <li>
-                    <a href="/receiving">Receiving</a>
+                    <a href="/receiving-stats">Receiving</a>
                 </li>
                 <li>
-                    <a href="/rushing">Rushing</a>
+                    <a href="/rushing-stats">Rushing</a>
                 </li>
                 <li>
-                    <a href="/passing">Passing</a>
+                    <a href="/passing-stats">Passing</a>
                 </li>
                 <li>
-                    <a href="/wins">Wins</a>
+                    <a href="/win-stats">Wins</a>
                 </li>
             </ul>
         </>
