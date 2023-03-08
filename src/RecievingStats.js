@@ -8,17 +8,17 @@ import {
     Title,
     Tooltip,
     Legend,
-  } from 'chart.js';
-  import { Bar } from 'react-chartjs-2';
-  
-  ChartJS.register(
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(
     CategoryScale,
     LinearScale,
     BarElement,
     Title,
     Tooltip,
     Legend
-  );
+);
 
 
 
@@ -90,7 +90,7 @@ export const ReceivingStats = () => {
     if (buttonPressed) {
         return (
             <>
-            <select onChange={
+                <select onChange={
                     (event) => {
                         setYear(event.target.value)
                     }
@@ -107,7 +107,7 @@ export const ReceivingStats = () => {
                 </select>
                 <h2>Receiving Stats</h2>
                 <div className="max-w-7xl m-auto border ">
-                <Bar data={data} options={options} />
+                    <Bar data={data} options={options} />
                 </div>
             </>
         )
@@ -131,7 +131,7 @@ export const ReceivingStats = () => {
                     }
 
                 </select>
-                <button onClick={() => {setButtonPressed(true)}
+                <button onClick={() => { setButtonPressed(true) }
                 }>Submit</button>
 
             </>

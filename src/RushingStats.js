@@ -1,6 +1,24 @@
 import { useEffect, useState } from "react"
 import { getRushingStatsByYear } from "./Managers"
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
 
 export const RushingStats = () => {
@@ -8,6 +26,10 @@ export const RushingStats = () => {
     const [teams, setTeams] = useState([])
     const [year, setYear] = useState(0)
     const [phase, setPhase] = useState("")
+    const [teamNames, setTeamNames] = useState([])
+    const [teamYards, setTeamYards] = useState([])
+    const [buttonPressed, setButtonPressed] = useState(false)
+
     useEffect(
         () => {
             getRushingStatsByYear(phase, year)
@@ -22,30 +44,78 @@ export const RushingStats = () => {
         () => {
             const teamList = rushingStats?._embedded?.teamRushingStatsList
             setTeams(teamList)
+            const names = teamList?.map(team => team.name)
+            setTeamNames(names)
+            const yards = teamList?.map(team => team.yards)
+            setTeamYards(yards)
         },
         [rushingStats]
     )
 
+    const options = {
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: `Rushing Stats for ${year} (${phase})`,
+            },
+        },
+    };
+
+    const labels = teamNames;
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                label: 'Team Yards',
+                data: teamYards,
+                borderColor: 'rgb(255, 99, 132)',
+                backgroundColor: 'rgba(0, 0, 255, 0.5)',
+            }
+        ],
+    };
 
 
+    let years = []
+    for (let i = 2022; i > 2000; i--) {
+        years.push(i)
+    }
 
-    if (teams) {
+
+    if (buttonPressed) {
         return (
             <>
-                <h2>Rushing Stats</h2>
+            <select onChange={
+                (event) => {
+                    setYear(event.target.value)
+                }
+            }>
+                <option value="select">Select year..</option>
                 {
-                    teams.map(
-                        (team, index) => {
-                            return <div key={index}>
-                            <p>{team.name}</p>
-                            <p>{team.yards}</p>
-                            </div>
-
+                    years.map(
+                        (year) => {
+                            return <option key={year} value={year}>{year}</option>
                         }
                     )
                 }
 
-            </>
+            </select>
+            <h2>Phase Selector</h2>
+                <select onChange={
+                    (event) => {
+                        setPhase(event.target.value)
+                    }
+                }>
+                    <option value="select">Select phase..</option>
+                    <option value="offense">Offense</option>
+                    <option value="defense">Defense</option>
+                </select>
+            <h2>Rushing Stats</h2>
+            <div className="max-w-7xl m-auto border ">
+                <Bar data={data} options={options} />
+            </div>
+        </>
         )
     }
     else {
@@ -58,16 +128,13 @@ export const RushingStats = () => {
                     }
                 }>
                     <option value="select">Select year..</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                    <option value="2020">2020</option>
-                    <option value="2019">2019</option>
-                    <option value="2018">2018</option>
-                    <option value="2017">2017</option>
-                    <option value="2016">2016</option>
-                    <option value="2015">2015</option>
-                    <option value="2014">2014</option>
-                    <option value="2013">2013</option>
+                    {
+                        years.map(
+                            (year) => {
+                                return <option key={year} value={year}>{year}</option>
+                            }
+                        )
+                    }
 
                 </select>
                 <h2>Phase Selector</h2>
@@ -80,6 +147,9 @@ export const RushingStats = () => {
                     <option value="offense">Offense</option>
                     <option value="defense">Defense</option>
                 </select>
+                <button onClick={() => { setButtonPressed(true) }
+                }>Submit</button>
+
 
             </>
         )
