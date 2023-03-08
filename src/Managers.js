@@ -1,7 +1,7 @@
 const options = {
 	method: 'GET',
 	headers: {
-		'X-RapidAPI-Key': 'd52696507amsh5734a51f4253576p10fe80jsn83fd0555404b',
+		'X-RapidAPI-Key': '8a3378e12dmsh072ecacfd973324p17ee9fjsn0b5e8f6eb728',
 		'X-RapidAPI-Host': 'nfl-team-stats.p.rapidapi.com'
 	}
 };
