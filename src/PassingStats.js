@@ -66,7 +66,7 @@ export const PassingStats = () => {
         plugins: {
             title: {
                 display: true,
-                text: `Rushing Stats for ${year} (${phase})`,
+                text: `Passing Stats for ${year} (${phase})`,
             },
         },
     };
