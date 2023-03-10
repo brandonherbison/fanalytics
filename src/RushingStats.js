@@ -10,6 +10,9 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import { BsFillArrowUpCircleFill } from 'react-icons/bs';
+import { BsFillArrowDownCircleFill } from 'react-icons/bs';
+import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 
 ChartJS.register(
     CategoryScale,
@@ -71,7 +74,7 @@ export const RushingStats = () => {
                 label: 'Team Yards',
                 data: teamYards,
                 borderColor: 'rgb(255, 99, 132)',
-                backgroundColor: 'rgba(0, 0, 255, 0.5)',
+                backgroundColor: 'rgba(59 130 246)',
             }
         ],
     };
@@ -85,13 +88,17 @@ export const RushingStats = () => {
 
     if (buttonPressed) {
         return (
-            <>
-                <select onChange={
+            <div className="w-7/12 m-auto my-10">
+
+                <div className="border w-full">
+                    <Bar data={data} options={options} />
+                </div>
+                <select className="border" onChange={
                     (event) => {
                         setYear(event.target.value)
                     }
                 }>
-                    <option value="select">Select year..</option>
+                    <option value="select">Change Year..</option>
                     {
                         years.map(
                             (year) => {
@@ -101,8 +108,7 @@ export const RushingStats = () => {
                     }
 
                 </select>
-                <h2>Phase Selector</h2>
-                <select onChange={
+                 <select className="border" onChange={
                     (event) => {
                         setPhase(event.target.value)
                     }
@@ -111,17 +117,34 @@ export const RushingStats = () => {
                     <option value="offense">Offense</option>
                     <option value="defense">Defense</option>
                 </select>
-                <h2>Rushing Stats</h2>
-                <div className="max-w-7xl m-auto border ">
-                    <Bar data={data} options={options} />
+
+                <div className="py-24 text-center">
+                    <h2 className="text-5xl text-center py-5">Insights</h2>
+                    <div className="flex justify-evenly w-full m-auto">
+                        <div className="w-64 h-64 shadow shadow-lg rounded-xl bg-white border border-blue-500 px-4">
+                            <BsFillArrowUpCircleFill className="text-7xl text-blue-500 mx-auto mt-8" />
+                            <h2 className="text-2xl text-center my-4">Trending Up</h2>
+                            <p className="text-md">The team with the most yards in {year} was the {teams[teamYards.indexOf(Math.max(...teamYards))].name}</p>
+                        </div>
+                        <div className="w-64 h-64 shadow shadow-lg rounded-xl bg-white border border-blue-500 px-4">
+                            <BsFillArrowDownCircleFill className="text-7xl text-blue-500 mx-auto mt-8" />
+                            <h2 className="text-2xl text-center my-4">Trending Down</h2>
+                            <p className="text-md">The team with the least yards in {year} was the {teams[teamYards.indexOf(Math.min(...teamYards))].name}</p>
+                        </div>
+                        <div className="w-64 h-64 shadow shadow-lg rounded-xl bg-white border border-blue-500 px-4">
+                            <BsFillArrowRightCircleFill className="text-7xl text-blue-500 mx-auto mt-8" />
+                            <h2 className="text-2xl text-center my-4">Average</h2>
+                            <p className="text-md">The average yards per team in {year} was {Math.round(teamYards.reduce((a, b) => a + b, 0) / teamYards.length)}</p>
+                        </div>
+                    </div>
                 </div>
-            </>
+            </div>
         )
     }
     else {
         return (
-            <>
-                <h2>Year Selector</h2>
+            <div className="flex border border-blue-500 max-w-3xl m-auto mt-16 text-center shadow shadow-lg rounded-xl py-5 justify-center gap-1 items-center">
+                <h2>I want to see rushing stats for the year:</h2>
                 <select onChange={
                     (event) => {
                         setYear(event.target.value)
@@ -137,7 +160,6 @@ export const RushingStats = () => {
                     }
 
                 </select>
-                <h2>Phase Selector</h2>
                 <select onChange={
                     (event) => {
                         setPhase(event.target.value)
@@ -147,11 +169,10 @@ export const RushingStats = () => {
                     <option value="offense">Offense</option>
                     <option value="defense">Defense</option>
                 </select>
-                <button onClick={() => { setButtonPressed(true) }
+                <button className="bg-blue-500 text-white p-0.5 rounded" onClick={() => { setButtonPressed(true) }
                 }>Submit</button>
 
-
-            </>
+            </div>
         )
     }
 }
