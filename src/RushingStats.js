@@ -86,22 +86,22 @@ export const RushingStats = () => {
     if (buttonPressed) {
         return (
             <>
-            <select onChange={
-                (event) => {
-                    setYear(event.target.value)
-                }
-            }>
-                <option value="select">Select year..</option>
-                {
-                    years.map(
-                        (year) => {
-                            return <option key={year} value={year}>{year}</option>
-                        }
-                    )
-                }
+                <select onChange={
+                    (event) => {
+                        setYear(event.target.value)
+                    }
+                }>
+                    <option value="select">Select year..</option>
+                    {
+                        years.map(
+                            (year) => {
+                                return <option key={year} value={year}>{year}</option>
+                            }
+                        )
+                    }
 
-            </select>
-            <h2>Phase Selector</h2>
+                </select>
+                <h2>Phase Selector</h2>
                 <select onChange={
                     (event) => {
                         setPhase(event.target.value)
@@ -111,11 +111,11 @@ export const RushingStats = () => {
                     <option value="offense">Offense</option>
                     <option value="defense">Defense</option>
                 </select>
-            <h2>Rushing Stats</h2>
-            <div className="max-w-7xl m-auto border ">
-                <Bar data={data} options={options} />
-            </div>
-        </>
+                <h2>Rushing Stats</h2>
+                <div className="max-w-7xl m-auto border ">
+                    <Bar data={data} options={options} />
+                </div>
+            </>
         )
     }
     else {
