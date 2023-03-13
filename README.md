@@ -20,7 +20,7 @@ Using Chart.js, Fanalytics provides an interactive way to explore NFL data, with
 
 To use Fanalytics, follow these steps:
 
-1. Clone the repository to your local machine using `git clone https://github.com/your-username/fanalytics.git`
+1. Clone the repository to your local machine using `git clone https://github.com/brandonherbison/fanalytics.git`
 2. Navigate to the project directory using `cd fanalytics`
 3. Install the necessary dependencies using `npm install`
 4. Start the application using `npm start`
